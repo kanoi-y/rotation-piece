@@ -12,11 +12,28 @@ export default function App() {
     setPieceState((prevPieceState) => {
       let result: number[][] = [];
 
-      for (let i = 0; i < 3; i++) {
+      for (let i = 0; i < prevPieceState.length; i++) {
         const line: number[] = [];
 
-        for (let j = 0; j < 3; j++) {
-          const cell = prevPieceState[2 - j][i];
+        for (let j = 0; j < prevPieceState[i].length; j++) {
+          const cell = prevPieceState[prevPieceState[i].length - 1 - j][i];
+          line.push(cell);
+        }
+        result.push(line);
+      }
+      return result;
+    });
+  };
+
+  const sideReverse = () => {
+    setPieceState((prevPieceState) => {
+      let result: number[][] = [];
+
+      for (let i = 0; i < prevPieceState.length; i++) {
+        const line: number[] = [];
+
+        for (let j = 0; j < prevPieceState[i].length; j++) {
+          const cell = prevPieceState[i][prevPieceState[i].length - 1 - j];
           line.push(cell);
         }
         result.push(line);
@@ -39,7 +56,12 @@ export default function App() {
           </div>
         ))}
       </div>
-      <button onClick={() => rightRotation()}>ピースを回転</button>
+      <div>
+        <button style={{ marginRight: "12px" }} onClick={() => rightRotation()}>
+          ピースを右回転
+        </button>
+        <button onClick={() => sideReverse()}>ピースを横に反転</button>
+      </div>
     </div>
   );
 }
