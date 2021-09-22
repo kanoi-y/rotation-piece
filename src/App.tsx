@@ -10,35 +10,21 @@ export default function App() {
 
   const rightRotation = () => {
     setPieceState((prevPieceState) => {
-      let result: number[][] = [];
-
-      for (let i = 0; i < prevPieceState.length; i++) {
-        const line: number[] = [];
-
-        for (let j = 0; j < prevPieceState[i].length; j++) {
-          const cell = prevPieceState[prevPieceState[i].length - 1 - j][i];
-          line.push(cell);
-        }
-        result.push(line);
-      }
-      return result;
+      return prevPieceState.map((line, i) => {
+        return line.map((cell, j) => {
+          return prevPieceState[line.length - 1 - j][i];
+        });
+      });
     });
   };
 
   const sideReverse = () => {
     setPieceState((prevPieceState) => {
-      let result: number[][] = [];
-
-      for (let i = 0; i < prevPieceState.length; i++) {
-        const line: number[] = [];
-
-        for (let j = 0; j < prevPieceState[i].length; j++) {
-          const cell = prevPieceState[i][prevPieceState[i].length - 1 - j];
-          line.push(cell);
-        }
-        result.push(line);
-      }
-      return result;
+      return prevPieceState.map((line, i) => {
+        return line.map((cell, j) => {
+          return prevPieceState[i][line.length - 1 - j];
+        });
+      });
     });
   };
 
